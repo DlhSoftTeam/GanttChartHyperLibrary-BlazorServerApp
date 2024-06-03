@@ -13,5 +13,5 @@ window.interop = {
 function itemPropertyChanged(item, propertyName, isDirect, isFinal) {
     if (!isDirect || !isFinal || propertyName == 'isSelected')
         return;
-    alert('Property ' + propertyName + ' of item ' + item.content + ' has changed.')
+    DotNet.invokeMethodAsync('BlazorServerApp', 'ItemPropertyChanged', item.content + '.' + propertyName + '=' + item[propertyName]);
 }

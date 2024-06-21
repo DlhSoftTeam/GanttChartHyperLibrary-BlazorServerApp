@@ -3,7 +3,7 @@ window.interop = {
     initialize: () => {
         ganttChartView = document.getElementById("ganttChartView");
         DlhSoft.Controls.GanttChartView.initialize(ganttChartView,
-            [{ content: 'Item 1' }, { content: 'Item 2' }],
+            [{ content: 'Requirements' }, { content: 'Analysis' }],
             { itemPropertyChangeHandler: itemPropertyChanged });
     },
     addItem: (item) => {

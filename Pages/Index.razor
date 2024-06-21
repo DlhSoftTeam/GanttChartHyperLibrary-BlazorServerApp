@@ -1,9 +1,29 @@
 ﻿@page "/"
+@inject IJSRuntime JSRuntime
 
 <PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Gantt Chart Hyper Library - Blazor Server App</h1>
 
-Welcome to your new app.
+<p role="status">Number of tasks added: @currentCount</p>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<div id="ganttChartView" style="margin: 10px 0; width: 800px; height: 350px;" />
+
+<button class="btn btn-primary" @onclick="IncrementCount">New task</button>
+
+@code {
+    protected async override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+            await JSRuntime.InvokeVoidAsync("interop.initialize");
+    }
+
+    private int currentCount = 0;
+
+    private async void IncrementCount()
+    {
+        currentCount++;
+        await JSRuntime.InvokeVoidAsync("interop.addItem", new { content = "New item " + currentCount });
+    }
+}
+
